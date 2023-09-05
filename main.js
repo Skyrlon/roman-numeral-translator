@@ -18,12 +18,25 @@ buttonElement.addEventListener("click", function () {
 
 function translateNumber(number) {
   let translatedNumber = 0;
-  number
-    .split("")
-    .forEach(
-      (e) =>
-        (translatedNumber =
-          translatedNumber + numeralsList.find((x) => x.roman === e).arab)
-    );
+  let numberArray = number.split("");
+
+  numberArray.forEach((n, index, array) => {
+    const numberData = numeralsList.find((x) => x.roman === n);
+    const nextNumberData =
+      index < array.length &&
+      numeralsList.find((x) => x.roman === array[index + 1]);
+    if (
+      (nextNumberData && numberData.arab > nextNumberData?.arab) ||
+      !nextNumberData
+    ) {
+      translatedNumber =
+        translatedNumber +
+        numberArray.filter((x) => x === n).length * numberData.arab;
+    }
+    if (nextNumberData && numberData.arab < nextNumberData.arab) {
+      translatedNumber = translatedNumber - numberData.arab;
+    }
+  });
+
   resultElement.textContent = translatedNumber;
 }
