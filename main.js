@@ -19,21 +19,21 @@ buttonElement.addEventListener("click", function () {
 function translateNumber(number) {
   let translatedNumber = 0;
   let numberArray = number.split("");
-
+  console.log(number);
   numberArray.forEach((n, index, array) => {
     const numberData = numeralsList.find((x) => x.roman === n);
     const nextNumberData =
       index < array.length &&
       numeralsList.find((x) => x.roman === array[index + 1]);
     if (
-      (nextNumberData && numberData.arab > nextNumberData?.arab) ||
+      (nextNumberData && numberData.arab >= nextNumberData?.arab) ||
       !nextNumberData
     ) {
-      translatedNumber =
-        translatedNumber +
-        numberArray.filter((x) => x === n).length * numberData.arab;
+      console.log(n, index, "+", numberData.arab);
+      translatedNumber = translatedNumber + numberData.arab;
     }
     if (nextNumberData && numberData.arab < nextNumberData.arab) {
+      console.log(n, index, "-", numberData.arab);
       translatedNumber = translatedNumber - numberData.arab;
     }
   });
