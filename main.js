@@ -19,7 +19,6 @@ buttonElement.addEventListener("click", function () {
 function translateNumber(number) {
   let translatedNumber = 0;
   let numberArray = number.split("");
-  console.log(number);
   numberArray.forEach((n, index, array) => {
     const numberData = numeralsList.find((x) => x.roman === n);
     const nextNumberData =
@@ -29,11 +28,9 @@ function translateNumber(number) {
       (nextNumberData && numberData.arab >= nextNumberData?.arab) ||
       !nextNumberData
     ) {
-      console.log(n, index, "+", numberData.arab);
       translatedNumber = translatedNumber + numberData.arab;
     }
     if (nextNumberData && numberData.arab < nextNumberData.arab) {
-      console.log(n, index, "-", numberData.arab);
       translatedNumber = translatedNumber - numberData.arab;
     }
   });
