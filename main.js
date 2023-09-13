@@ -13,7 +13,7 @@ const numeralsList = [
 ];
 
 buttonElement.addEventListener("click", function () {
-  translateNumber(romanNumeralInput.value);
+  isCorrectRomanNumeral(romanNumeralInput.value);
 });
 
 function translateNumber(number) {
@@ -36,4 +36,13 @@ function translateNumber(number) {
   });
 
   resultElement.textContent = translatedNumber;
+}
+
+function isCorrectRomanNumeral(number) {
+  let numberArray = number.split("");
+  if (!numberArray.every((n) => numeralsList.find((x) => x.roman === n))) {
+    resultElement.textContent = "Incorrect number";
+  } else {
+    translateNumber(number);
+  }
 }
