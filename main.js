@@ -40,7 +40,27 @@ function translateNumber(number) {
 
 function isCorrectRomanNumeral(number) {
   let numberArray = number.split("");
-  if (!numberArray.every((n) => numeralsList.find((x) => x.roman === n))) {
+  const areAllCorrectNumeral = numberArray.every((n) =>
+    numeralsList.find((x) => x.roman === n)
+  );
+  const areHalfNumeralsNotBeforeFullNumerals =
+    areAllCorrectNumeral &&
+    numberArray.every((n, index, array) => {
+      const numberData = numeralsList.find((x) => x.roman === n);
+      const nextNumberData =
+        index < array.length &&
+        numeralsList.find((x) => x.roman === array[index + 1]);
+      const isHalfNumeral =
+        numberData.arab /
+          Math.pow(10, numberData.arab.toString().length - 1) ===
+        5;
+      if (isHalfNumeral && nextNumberData?.arab > numberData.arab) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+  if (!areAllCorrectNumeral || !areHalfNumeralsNotBeforeFullNumerals) {
     resultElement.textContent = "Incorrect number";
   } else {
     translateNumber(number);
