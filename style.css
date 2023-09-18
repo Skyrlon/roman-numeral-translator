@@ -1,0 +1,9 @@
+label,
+input {
+  display: none;
+}
+
+label.show,
+input.show {
+  display: block;
+}

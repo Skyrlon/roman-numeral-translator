@@ -1,4 +1,8 @@
+const romanLabelElement = document.querySelector("label[for='roman-numeral']");
+const arabLabelElement = document.querySelector("label[for='arab-numeral']");
 const romanNumeralInput = document.querySelector("#roman-numeral");
+const arabNumeralInput = document.querySelector("#arab-numeral");
+const switchButtonElement = document.querySelector("#switch");
 const buttonElement = document.querySelector("#submit-button");
 const resultElement = document.querySelector("#result");
 
@@ -14,6 +18,16 @@ const numeralsList = [
 
 buttonElement.addEventListener("click", function () {
   isCorrectRomanNumeral(romanNumeralInput.value);
+});
+
+switchButtonElement.addEventListener("click", function () {
+  const labelsAndInputs = [
+    romanLabelElement,
+    arabLabelElement,
+    romanNumeralInput,
+    arabNumeralInput,
+  ];
+  labelsAndInputs.forEach((x) => x.classList.toggle("show"));
 });
 
 function translateNumber(number) {
